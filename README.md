@@ -1,5 +1,9 @@
 ## Spring MVC Film C.R.U.D. Project
 
+### Authors
+- Luke Leonard
+- George Moore
+
 ### Overview
 
 * Provides users with the ability to enter up to five food trucks. Input is required from a user for the film id, and search keyword.
