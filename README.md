@@ -1,8 +1,10 @@
 ## Spring MVC Film C.R.U.D. Project
 
 ### Authors
- * George Moore
- * Luke Leonard
+
+- Luke Leonard
+- George Moore
+
 
 ### Overview
 
