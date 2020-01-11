@@ -36,5 +36,11 @@
 		<input type="submit" name="filmId" value="${film.id}" />
 	</form>
 	</c:if>
+	
+	<form action="home.do" method="GET">
+		<input type="submit" value="Home" />
+	</form>
 </body>
+
+
 </html>

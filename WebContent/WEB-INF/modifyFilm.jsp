@@ -53,9 +53,14 @@
 		<input type="text" name="specialFeatures" value="${film.specialFeatures}" > 
 		<br>
 		<input type="submit" name="filmId" value="${film.id}" />
+		
+		
 		<br><br><br>
 	</form>
 	<br>
+	<form action="home.do" method="GET">
+		<input type="submit" value="Home" />
+	</form>
 
 
 

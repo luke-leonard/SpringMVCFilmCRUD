@@ -14,7 +14,7 @@
 	<h3>Search For A Film by ID</h3>
 	<form action="getFilmData.do" method="GET">
 		Film ID:
-		<input type="text" name="filmID" size="4"/> 
+		<input type="number" name="filmID" size="4"/> 
 		<input type="submit" value="Get Film Data" />
 	</form>
 	
