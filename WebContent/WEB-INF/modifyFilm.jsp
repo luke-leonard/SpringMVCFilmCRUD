@@ -54,7 +54,7 @@
 		<br>
 		
 		
-		<input type="submit" value="Create New Film" >
+		<input type="submit" value="Submit" >
 		
 		
 		<br><br><br>
