@@ -52,9 +52,10 @@ public class FilmController {
 		return mv;
 		
 	}
-	@RequestMapping(path="updateFilm.do", method=RequestMethod.POST)
-	public ModelAndView updateFilm(Film film) {
+	@RequestMapping(path="updateFilm.do", params="filmId", method=RequestMethod.POST)
+	public ModelAndView updateFilm(int filmId, Film film) {
 		ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
+		film.setId(filmId);
 		mv.addObject("film", filmDAO.updateFilm(film));
 		return mv;
 		

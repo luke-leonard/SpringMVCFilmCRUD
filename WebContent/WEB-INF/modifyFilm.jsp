@@ -52,11 +52,7 @@
 		<label for="feat">Special Features</label>
 		<input type="text" name="specialFeatures" value="${film.specialFeatures}" > 
 		<br>
-		
-		
-		<input type="submit" value="Submit" >
-		
-		
+		<input type="submit" name="filmId" value="${film.id}" />
 		<br><br><br>
 	</form>
 	<br>

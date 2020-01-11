@@ -29,10 +29,12 @@
       <p>No film found</p>
     </c:otherwise>
   </c:choose>
+  <c:if test="${! empty film}">
   <h3>Edit This Film</h3>
 	<form action="modifyFilm.do" method="GET">
 		Film Editor:
 		<input type="submit" name="filmId" value="${film.id}" />
 	</form>
+	</c:if>
 </body>
 </html>
