@@ -33,14 +33,29 @@ public class FilmController {
 	public ModelAndView getFilmPage() {
 		ModelAndView mv = new ModelAndView("WEB-INF/modifyFilm.jsp");
 		mv.addObject("film", new Film());
+		mv.addObject("redirectName", "NewFilm.do");
+		return mv;
+		
+	}
+	@RequestMapping(path="modifyFilm.do", params="filmId", method=RequestMethod.GET)
+	public ModelAndView editFilm(int filmId) {
+		ModelAndView mv = new ModelAndView("WEB-INF/modifyFilm.jsp");
+		mv.addObject("film", filmDAO.findFilmById(filmId));
+		mv.addObject("redirectName", "updateFilm.do");
 		return mv;
 		
 	}
 	@RequestMapping(path="NewFilm.do", method=RequestMethod.POST)
 	public ModelAndView createFilm(Film film) {
-		System.out.println(film);
 		ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
 		mv.addObject("film", filmDAO.createFilm(film));
+		return mv;
+		
+	}
+	@RequestMapping(path="updateFilm.do", method=RequestMethod.POST)
+	public ModelAndView updateFilm(Film film) {
+		ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
+		mv.addObject("film", filmDAO.updateFilm(film));
 		return mv;
 		
 	}
