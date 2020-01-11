@@ -41,9 +41,9 @@ public class FilmDAOImplInMemory implements FilmDAO {
 	}
 
 	@Override
-	public boolean updateFilm(Film film) {
+	public Film updateFilm(Film film) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override

@@ -13,6 +13,6 @@ public interface FilmDAO {
 	  public List<Actor> findActorsByFilmId(int filmId);
 	  
 	  public Film createFilm(Film film);
-	  public boolean updateFilm(Film film);
+	  public Film updateFilm(Film film);
 	  public boolean deleteFilm(Film film);
 }
