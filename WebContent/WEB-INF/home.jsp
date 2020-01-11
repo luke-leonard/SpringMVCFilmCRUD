@@ -9,6 +9,13 @@
 <title>Home</title>
 </head>
 <body>
-
+	<p>Hello Film Buff</p>
+	
+	<h3>Film</h3>
+	<form action="home.do" method="GET">
+		Film ID:
+		<input type="text" name="ID" size="4"/> 
+		<input type="submit" value="Get Film Data" />
+	</form>
 </body>
 </html>
