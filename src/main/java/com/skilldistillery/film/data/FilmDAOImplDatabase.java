@@ -9,17 +9,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
 import com.skilldistillery.film.entities.Actor;
 import com.skilldistillery.film.entities.Film;
 
+@Primary
+@Component
 public class FilmDAOImplDatabase implements FilmDAO {
 	private static final String url = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
 	private static final String user = "student";
 	private static final String pass = "student";
+	
 
 	static {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +56,12 @@ public class FilmDAOImplDatabase implements FilmDAO {
 			try {
 				pstmt = conn.prepareStatement(sql);
 				for (int i = 0; i < args.length; i++) {
-					pstmt.setString(i + 1, args[i]);
+					try {
+						int arg = Integer.parseInt(args[i]);
+						pstmt.setInt(i + 1, arg);
+					}catch(NumberFormatException e) {
+						pstmt.setString(i + 1, args[i]);
+					}
 				}
 				rs = pstmt.executeQuery();
 			} catch (SQLException e) {
@@ -139,7 +150,7 @@ public class FilmDAOImplDatabase implements FilmDAO {
 
 	@Override
 	public Actor findActorById(int actorId) {
-		String sql = "SELECT id, first_name, last_name" + "FROM actor " + "WHERE actor.id = ?";
+		String sql = "SELECT id, first_name, last_name " + "FROM actor " + "WHERE actor.id = ?";
 		try ( // Dont Wrap
 				QueryRunner qr = new QueryRunner(); // Dont Wrap
 				ResultSet rs = qr.runSelectQuery(sql, String.valueOf(actorId));// Dont Wrap
