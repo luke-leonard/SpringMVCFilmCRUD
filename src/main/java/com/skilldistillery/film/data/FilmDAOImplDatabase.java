@@ -73,31 +73,54 @@ public class FilmDAOImplDatabase implements FilmDAO {
 
 		public int runInsertQuery(String sql, String... args) {
 			try {
-				pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 				for (int i = 0; i < args.length; i++) {
 					pstmt.setString(i + 1, args[i]);
 				}
 				int updateCount = pstmt.executeUpdate();
-				if (updateCount != 1) {
+				if(updateCount != 1) 
+				{
 					failTransaction();
 					return -1;
 				}
-
+				
 				ResultSet rs = pstmt.getGeneratedKeys();
 				int generatedKey = -1;
-				if (rs.next()) {
+				if(rs.next()) {
 					generatedKey = rs.getInt(1);
-				} else {
+				} 
+				else {
 					failTransaction();
 					return -1;
 				}
 				return generatedKey;
-
+				
 			} catch (SQLException e) {
 				failTransaction();
 				System.err.println(e);
 			}
 			return -1;
+		}
+		public boolean runUpdateQuery(String sql, String... args) {
+			try {
+				pstmt = conn.prepareStatement(sql);
+				for (int i = 0; i < args.length; i++) {
+					pstmt.setString(i + 1, args[i]);
+				}
+				int updateCount = pstmt.executeUpdate();
+				if(updateCount != 1) 
+				{
+					failTransaction();
+					return false;
+				}else {
+					return true;	
+				}
+				
+			} catch (SQLException e) {
+				failTransaction();
+				System.err.println(e);
+			}
+			return false;
 		}
 
 		public void failTransaction() {
@@ -239,9 +262,42 @@ public class FilmDAOImplDatabase implements FilmDAO {
 	}
 
 	@Override
-	public boolean updateFilm(Film film) {
-		// TODO Auto-generated method stub
-		return false;
+	public Film updateFilm(Film film) {
+		String sql = "UPDATE film SET title = ?,"
+				+ "description = ?,"
+				+ "release_year = ?,"
+				+ "language_id = ?,"
+				+ "rental_duration = ?,"
+				+ "rental_rate = ?,"
+				+ "length = ?,"
+				+ "replacement_cost = ?,"
+				+ "rating = ?,"
+				+ "special_features = ?"
+				+ "WHERE id = ?";
+		try (QueryRunner qr = new QueryRunner()) {
+			boolean didWork = qr.runUpdateQuery(sql,
+					String.valueOf(film.getTitle()),
+					String.valueOf(film.getDescription()),
+					String.valueOf(film.getReleaseYear()),
+					String.valueOf(film.getLanguageId()),
+					String.valueOf(film.getRentalDuration()),
+					String.valueOf(film.getRentalRate()),
+					String.valueOf(film.getLength()),
+					String.valueOf(film.getReplacementCost()),
+					String.valueOf(film.getRating()),
+					String.valueOf(film.getSpecialFeatures()),
+					String.valueOf(film.getId())
+					);
+			if(didWork) {
+				return film;
+			}
+			else {
+				qr.failTransaction();
+			}
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		return null;
 	}
 
 	@Override
