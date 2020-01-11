@@ -21,7 +21,7 @@ public class FilmDAOImplDatabase implements FilmDAO {
 	private static final String url = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
 	private static final String user = "student";
 	private static final String pass = "student";
-	
+
 
 	static {
 		try {
@@ -216,11 +216,24 @@ public class FilmDAOImplDatabase implements FilmDAO {
 				+ "rental_duration,rental_rate,length,replacement_cost,"
 				+ "rating,special_features) Values (?,?,?,?,?,?,?,?,?,?)";
 		try (QueryRunner qr = new QueryRunner()) {
-			int numberReturned = qr.runInsertQuery(sql);
-			if (numberReturned != 1) {
+			int generatedId = qr.runInsertQuery(sql,
+					String.valueOf(film.getTitle()),
+					String.valueOf(film.getDescription()),
+					String.valueOf(film.getReleaseYear()),
+					String.valueOf(film.getLanguageId()),
+					String.valueOf(film.getRentalDuration()),
+					String.valueOf(film.getRentalRate()),
+					String.valueOf(film.getLength()),
+					String.valueOf(film.getReplacementCost()),
+					String.valueOf(film.getRating()),
+					String.valueOf(film.getSpecialFeatures()));
+			if(generatedId > 0) {
+				film.setId(generatedId);
+				return film;
+			}
+			else {
 				qr.failTransaction();
 			}
-			return film;
 		} catch (Exception e) {
 			System.err.println(e);
 		}
