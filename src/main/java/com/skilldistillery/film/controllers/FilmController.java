@@ -3,32 +3,44 @@ package com.skilldistillery.film.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.film.data.FilmDAO;
+import com.skilldistillery.film.entities.Film;
 
 @Controller
 public class FilmController {
 	@Autowired
 	private FilmDAO filmDAO;
 	
-//	@RequestMapping("home.do")
-//	public String doSomething() {
-//		System.out.println("hello");
-//		return "WEB-INF/home.jsp";
-//	}
-	
 	@RequestMapping("home.do")
-	public ModelAndView getFilmByID() {
+	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("WEB-INF/home.jsp");
-		mv.addObject("data", filmDAO.findFilmById(1));
 		return mv;
 		
 	}
-	@RequestMapping("getFilmData.do")
-	public ModelAndView getFilmData() {
-		ModelAndView mv = new ModelAndView("WEB-INF/home.jsp");
-		mv.addObject("data", filmDAO.findFilmById(1));
+	@RequestMapping(path="getFilmData.do", params="filmID", method=RequestMethod.GET)
+	public ModelAndView getFilmData(int filmID) {
+		ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
+		mv.addObject("film", filmDAO.findFilmById(filmID));
+		return mv;
+		
+	}
+	@RequestMapping(path="NewFilmPage.do", method=RequestMethod.GET)
+	public ModelAndView getFilmPage() {
+		ModelAndView mv = new ModelAndView("WEB-INF/modifyFilm.jsp");
+		mv.addObject("film", new Film());
+		return mv;
+		
+	}
+	@RequestMapping(path="NewFilm.do", method=RequestMethod.POST)
+	public ModelAndView createFilm(Film film) {
+		System.out.println(film);
+		ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
+		mv.addObject("film", filmDAO.createFilm(film));
 		return mv;
 		
 	}
