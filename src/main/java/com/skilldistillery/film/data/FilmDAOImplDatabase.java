@@ -122,6 +122,27 @@ public class FilmDAOImplDatabase implements FilmDAO {
 			}
 			return false;
 		}
+		public boolean runDeleteQuery(String sql, String... args) {
+			try {
+				pstmt = conn.prepareStatement(sql);
+				for (int i = 0; i < args.length; i++) {
+					pstmt.setString(i + 1, args[i]);
+				}
+				int updateCount = pstmt.executeUpdate();
+				if(updateCount != 1) 
+				{
+					failTransaction();
+					return false;
+				}else {
+					return true;	
+				}
+				
+			} catch (SQLException e) {
+				failTransaction();
+				System.err.println(e);
+			}
+			return false;
+		}
 
 		public void failTransaction() {
 			successful = false;
@@ -302,7 +323,21 @@ public class FilmDAOImplDatabase implements FilmDAO {
 
 	@Override
 	public boolean deleteFilm(Film film) {
-		// TODO Auto-generated method stub
+		String sql = "DELETE FROM film "
+				+ "WHERE id = ?";
+		try (QueryRunner qr = new QueryRunner()) {
+			boolean didWork = qr.runUpdateQuery(sql,
+					String.valueOf(film.getId())
+					);
+			if(didWork) {
+				return true;
+			}
+			else {
+				qr.failTransaction();
+			}
+		} catch (Exception e) {
+			System.err.println(e);
+		}
 		return false;
 	}
 
