@@ -24,6 +24,12 @@
         <li>${film.rating}</li>
         <li>${film.specialFeatures}</li>
       </ul>
+      <h3>Actors</h3>
+      <ul>
+        <c:forEach var="actor" items="${film.actors}">
+        <li>${actor.firstName} ${actor.lastName}</li>
+        </c:forEach>
+        </ul>
     </c:when>
     <c:otherwise>
       <p>No film found</p>

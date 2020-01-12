@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.film.data.FilmDAO;
+import com.skilldistillery.film.entities.Actor;
 import com.skilldistillery.film.entities.Film;
 
 @Controller
@@ -36,17 +37,17 @@ public class FilmController {
 		}
 		mv.addObject("films", filmDAO.findFilmByKeyWord(filmSearch));
 		return mv;
-		
 	}
 	
 	@RequestMapping(path = "showFilm.do", params = "filmId", method = RequestMethod.GET)
 	public ModelAndView showFilm(int filmId) {
+		Film film = filmDAO.findFilmById(filmId);
+		film.setActors(filmDAO.findActorsByFilmId(filmId));
 		ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
-		mv.addObject("film", filmDAO.findFilmById(filmId));
+		mv.addObject("film", film);
 		return mv;
-
 	}
-
+	
 	@RequestMapping(path = "NewFilmPage.do", method = RequestMethod.GET)
 	public ModelAndView getFilmPage() {
 		ModelAndView mv = new ModelAndView("WEB-INF/modifyFilm.jsp");
