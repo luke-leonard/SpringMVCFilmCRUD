@@ -39,4 +39,7 @@
 * JDBC : Java Database Connectivity
 * DAO : Data Accessor Object implementation
 * JSP : JavaServer Page files to display webpages 
-* 
+* STS : Spring Tool Suite
+* Gradle
+* MySQL Workbench
+* Apache Server
