@@ -9,19 +9,18 @@
 <title>List Films</title>
 </head>
 <body>
-	<h2>You Have Chosen the Film</h2>
-	<c:if test="${! empty film}">
+	<h2>Search Results</h2>
+	<c:choose>
+	<c:when test="${! empty film}">
 		<a href="showFilm.do?filmId=${film.id}">${film.title}</a><br>
-	</c:if>
-	<c:if test="${! empty films}">
-		<ul>
+	</c:when>
+	<c:when test="${! empty films}">
 		<c:forEach var="singleFilm" items="${films}">
-		<li><a href="showFilm.do?filmId=${singleFilm.id}">${singleFilm.title}</a>
-		</li>
+		<a href="showFilm.do?filmId=${singleFilm.id}">${singleFilm.title}</a>
 		</c:forEach>
-		</ul>
-	</c:if>
-
+	</c:when>
+	<c:otherwise>No Results Found</c:otherwise>
+	</c:choose>
 	<form action="home.do" method="GET">
 		<input type="submit" value="Home" />
 	</form>

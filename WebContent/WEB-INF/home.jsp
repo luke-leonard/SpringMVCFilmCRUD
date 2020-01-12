@@ -9,7 +9,7 @@
 <title>Home</title>
 </head>
 <body>
-	<p>Hello Film Buff</p>
+	<h2>Welcome Film Buff</h2>
 	
 	<h3>Search For A Film by ID or Keyword</h3>
 	<form action="getFilmData.do" method="GET">

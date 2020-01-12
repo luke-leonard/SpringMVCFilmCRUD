@@ -9,8 +9,9 @@
 <title>Error</title>
 </head>
 <body>
-<h2>Buzzer Noise Fail</h2>
-	<form action="home.do" method="GET">
+<h2>Error</h2>
+<p>You have input an invalid request</p>
+	<form action="home.do" method="GET" >
 		<input type="submit" value="Home" />
 	</form>
 </body>
