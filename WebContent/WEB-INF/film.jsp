@@ -30,13 +30,16 @@
     </c:otherwise>
   </c:choose>
   <c:if test="${! empty film}">
-  <h3>Edit This Film</h3>
 	<form action="modifyFilm.do" method="GET">
-		Film Editor:
-		<input type="submit" name="filmId" value="${film.id}" />
+		<input type="hidden" name="filmId" value="${film.id}" />
+		<input type="submit" name="Edit" value="Edit" />
+	</form>
+	<form action="deleteFilm.do" method="POST">
+		<input type="hidden" name="filmId" value="${film.id}" />
+		<input type="submit" name="Delete" value="Delete" />
 	</form>
 	</c:if>
-	
+	<br>
 	<form action="home.do" method="GET">
 		<input type="submit" value="Home" />
 	</form>

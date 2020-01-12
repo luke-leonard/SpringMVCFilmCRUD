@@ -11,16 +11,14 @@
 <body>
 	<p>Hello Film Buff</p>
 	
-	<h3>Search For A Film by ID</h3>
+	<h3>Search For A Film by ID or Keyword</h3>
 	<form action="getFilmData.do" method="GET">
-		Film ID:
-		<input type="number" name="filmID" size="4"/> 
+		<input type="text" name="filmSearch"/> 
 		<input type="submit" value="Get Film Data" />
 	</form>
 	
 	<h3>Add A New Film To The Database</h3>
 	<form action="NewFilmPage.do" method="GET">
-		Film:
 		<input type="submit" value="Create New Film" />
 	</form>
 	

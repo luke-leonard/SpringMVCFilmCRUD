@@ -1,11 +1,12 @@
 package com.skilldistillery.film.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.film.data.FilmDAO;
@@ -23,20 +24,27 @@ public class FilmController {
 
 	}
 
-	@RequestMapping(path = "getFilmData.do", params = "filmID", method = RequestMethod.GET)
-	public ModelAndView getFilmData(Integer filmID) {
-		if (filmID == null || filmID < 0) {
-			filmID = 0;
-		}
-		Film databaseFilm = filmDAO.findFilmById(filmID);
-		if (databaseFilm == null) {
-			ModelAndView mv = new ModelAndView("WEB-INF/error.jsp");
-			return mv;
-		} else {
-			ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
+	@RequestMapping(path = "getFilmData.do", params = "filmSearch", method = RequestMethod.GET)
+	public ModelAndView getFilmData(String filmSearch) {
+		ModelAndView mv = new ModelAndView("WEB-INF/listFilms.jsp");
+		try {
+			Film databaseFilm = null;
+			int filmId = Integer.parseInt(filmSearch);
+			databaseFilm = filmDAO.findFilmById(filmId);
 			mv.addObject("film", databaseFilm);
-			return mv;
+		} catch (NumberFormatException e) {
 		}
+		mv.addObject("films", filmDAO.findFilmByKeyWord(filmSearch));
+		return mv;
+		
+	}
+	
+	@RequestMapping(path = "showFilm.do", params = "filmId", method = RequestMethod.GET)
+	public ModelAndView showFilm(int filmId) {
+		ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
+		mv.addObject("film", filmDAO.findFilmById(filmId));
+		return mv;
+
 	}
 
 	@RequestMapping(path = "NewFilmPage.do", method = RequestMethod.GET)
