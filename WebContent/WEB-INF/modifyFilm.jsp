@@ -26,7 +26,7 @@
 		 <br>
 		 
 		<label for="languageId">Language ID</label>
-		<input type="text" name="languageId" value="${film.languageId}" > 
+		<input type="number" name="languageId" min="1" max="6" value="${film.languageId}" > 
 		<br>
 		
 		<label for="rentalDuration">Rental Duration</label>
@@ -46,11 +46,11 @@
 		<br>
 		
 		<label for="rating">Rating</label> 
-		<input type="text" name="rating" value="${film.rating}" > 
+		<input type="number" name="rating" min="1" max="5" value="${film.rating}" > 
 		<br>
 		
-		<label for="feat">Special Features</label>
-		<input type="text" name="specialFeatures" value="${film.specialFeatures}" > 
+		<label for="specialFeature">Special Features</label>
+		<input type="number" name="specialFeatures" min="1" max="5" value="${film.specialFeatures}" > 
 		<br>
 		<input type="hidden" name="filmId" value="${film.id}" />
 		<input type="submit" name="Submit" value="Submit" />
