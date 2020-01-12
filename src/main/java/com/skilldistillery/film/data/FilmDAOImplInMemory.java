@@ -12,7 +12,6 @@ public class FilmDAOImplInMemory implements FilmDAO {
 
 	@Override
 	public Film findFilmById(int filmId) {
-		System.out.println("wrong move bozo");
 		return null;
 	}
 

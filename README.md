@@ -27,9 +27,11 @@
 
         * Film Page displays all details of the film as described in above Overview. The user is presented with two options via buttons to edit or delete the film. User input films are the only rows capable of being deleted database. Each film in the database is capable of being edited redirecting the user to modify film page.
 
-        * Modify film page will allow the user to input all film fields described above. If the film already existed the fields will be updated in the database, otherwise the film will be created in the database and given an id.
+        * Modify film page will allow the user to input all film fields described above excluding actors and category. If the film already existed the fields will be updated in the database, otherwise the film will be created in the database and given an id. Changes submitted successfully will result in the user being redirected to the homepage, invalid changes will result in the an error page.
 
         * Delete button will delete the film and redirect to the homepage upon confirmation. If the film was unable to be deleted the user will be redirected to an error page.
+
+				* Error page displays an error message if a use inputs invalid data.
 
 
 ### Technologies Used

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Film</title>
 </head>
 <body>
 <h2>You Have Chosen the Film</h2>
