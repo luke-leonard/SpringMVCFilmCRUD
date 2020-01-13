@@ -15,9 +15,13 @@
 		<a href="showFilm.do?filmId=${film.id}">${film.title}</a><br>
 	</c:when>
 	<c:when test="${! empty films}">
+	<ul>
 		<c:forEach var="singleFilm" items="${films}">
+		<li>
 		<a href="showFilm.do?filmId=${singleFilm.id}">${singleFilm.title}</a>
+		</li>
 		</c:forEach>
+	</ul>
 	</c:when>
 	<c:otherwise>No Results Found</c:otherwise>
 	</c:choose>

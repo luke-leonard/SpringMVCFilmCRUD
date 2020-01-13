@@ -18,6 +18,9 @@ public class Film {
 	private String specialFeatures;
 	
 	private List<Actor> actors;
+	private List<Category> categories;
+	
+
 	private String language;
 	
 	// C O N S T R U C T O R S
@@ -150,6 +153,12 @@ public class Film {
 	}
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+	public List<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	

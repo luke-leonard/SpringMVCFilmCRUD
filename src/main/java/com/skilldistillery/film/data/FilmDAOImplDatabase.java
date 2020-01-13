@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import com.skilldistillery.film.entities.Actor;
+import com.skilldistillery.film.entities.Category;
 import com.skilldistillery.film.entities.Film;
 
 @Primary
@@ -227,6 +228,26 @@ public class FilmDAOImplDatabase implements FilmDAO {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Category> findCategoryByFilmId(int filmId) {
+		List<Category> categoryInFilm = new ArrayList<>();
+		String sql = "SELECT category.id, category.name "
+				+ "FROM category JOIN film_category ON category.id = film_category.category_id " + "WHERE film_category.film_id = ?";
+		try ( // Dont Wrap
+				QueryRunner qr = new QueryRunner(); // Dont Wrap
+				ResultSet rs = qr.runSelectQuery(sql, String.valueOf(filmId));// Dont Wrap
+		) {
+
+			while (rs.next()) {
+				categoryInFilm.add(categoryFromResultSet(rs));
+			}
+			return categoryInFilm;
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return null;
+	}
 
 	@Override
 	public List<Film> findFilmByKeyWord(String keyword) {
@@ -376,6 +397,19 @@ public class FilmDAOImplDatabase implements FilmDAO {
 			return null;
 		}
 		return actor;
+	}
+	
+	private Category categoryFromResultSet(ResultSet rs) {
+		Category category = null;
+		try {
+			category = new Category( // Dont Wrap
+					rs.getInt("category.id"), // Dont Wrap
+					rs.getString("category.name"));// Dont Wrap
+		} catch (SQLException e) {
+			System.err.println(e);
+			return null;
+		}
+		return category;
 	}
 
 }

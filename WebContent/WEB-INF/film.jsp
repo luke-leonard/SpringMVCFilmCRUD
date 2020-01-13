@@ -30,6 +30,12 @@
         <li>${actor.firstName} ${actor.lastName}</li>
         </c:forEach>
         </ul>
+      <h3>Categories:</h3>
+      <ul>
+        <c:forEach var="category" items="${film.categories}">
+        <li>${category.name}</li>
+        </c:forEach>
+        </ul>
     </c:when>
     <c:otherwise>
       <p>No film found</p>

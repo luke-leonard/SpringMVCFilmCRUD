@@ -39,6 +39,7 @@ public class FilmController {
 	public ModelAndView showFilm(int filmId) {
 		Film film = filmDAO.findFilmById(filmId);
 		film.setActors(filmDAO.findActorsByFilmId(filmId));
+		film.setCategories(filmDAO.findCategoryByFilmId(filmId));
 		ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
 		mv.addObject("film", film);
 		return mv;
