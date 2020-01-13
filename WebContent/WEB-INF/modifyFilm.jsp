@@ -27,7 +27,8 @@
 		 
 		<label for="languageId">Language ID</label>
 		<input type="number" name="languageId" min="1" max="6" value="${film.languageId}" > 
-		<br>
+		<br> 
+		
 		
 		<label for="rentalDuration">Rental Duration</label>
 		<input type="text" name="rentalDuration" value="${film.rentalDuration}" > 

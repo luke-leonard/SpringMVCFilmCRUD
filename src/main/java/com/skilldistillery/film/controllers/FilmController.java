@@ -83,7 +83,7 @@ public class FilmController {
 			return mv;
 
 		} else {
-			ModelAndView mv = new ModelAndView("WEB-INF/film.jsp");
+			ModelAndView mv = new ModelAndView("WEB-INF/home.jsp");
 			mv.addObject("film", databaseFilm);
 			return mv;
 		}

@@ -10,11 +10,11 @@
 </head>
 <body>
 	<h2>Search Results</h2>
-	<c:choose>
-	<c:when test="${! empty film}">
+	
+	<c:if test="${! empty film}">
 		<a href="showFilm.do?filmId=${film.id}">${film.title}</a><br>
-	</c:when>
-	<c:when test="${! empty films}">
+	</c:if>
+	<c:if test="${! empty films}">
 	<ul>
 		<c:forEach var="singleFilm" items="${films}">
 		<li>
@@ -22,9 +22,9 @@
 		</li>
 		</c:forEach>
 	</ul>
-	</c:when>
-	<c:otherwise>No Results Found</c:otherwise>
-	</c:choose>
+	</c:if>
+	<c:if test="${empty film}">No Results Found</c:if>
+
 	<form action="home.do" method="GET">
 		<input type="submit" value="Home" />
 	</form>
